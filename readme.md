@@ -26,7 +26,7 @@ Once we unzip the file, we're given three log files to explore: access, vsftp, a
 
 Once we view the "access" file, we quickly discover that the attacker has used Nmap to perform footprinting and fingerprinting. This gives us our first answer.
 
-![nmap](file:/screenshots/Screenshot02.png)
+![nmap](screenshots/Screenshot02.png)
 
 Next, the attacker attempts to crack passwords and gain authorization. Scrolling down, we can see that he has used a brute-force password cracking tool called Hydra, our second answer:
 
