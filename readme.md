@@ -1,6 +1,6 @@
 # TryHackMe
 ## [Juicy Details](https://tryhackme.com/room/juicydetails)
-### Lab created by [GEEZET1](https://tryhackme.com/p/GEEZET1)
+### CTF created by [GEEZET1](https://tryhackme.com/p/GEEZET1)
 ### Writeup created by [Cedar](https://tryhackme.com/p/Cedar)
 
 # Introduction
