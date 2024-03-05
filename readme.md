@@ -16,9 +16,9 @@
 
 In order to begin, we'll have to use the link at the top right of the challenge pane to download a .zip file containing the aforementioned logs.
 
-![alt text](file:/screenshots/Screenshot01.png)
+![alt text](screenshots/Screenshot01.png)
 
-Once we unzip the file, we're given three log files to explore: access, vsftp, and auth. Load these files using your favorite viewer (I'll be using Excel for this example) and we're ready to begin!
+Once we unzip the file, we're given three log files to explore: access, vsftp, and auth. Load these files using your favorite viewer (I'll be using Excel for this example and there's nothing you can do about it) and we're ready to begin!
 
 # Reconnaisance
 
@@ -30,19 +30,19 @@ Once we view the "access" file, we quickly discover that the attacker has used N
 
 Next, the attacker attempts to crack passwords and gain authorization. Scrolling down, we can see that he has used a brute-force password cracking tool called Hydra, our second answer:
 
-![Hydra](file:/screenshots/Screenshot03.png)
+![Hydra](screenshots/Screenshot03.png)
 
 Once the attacker has credentials, they attempt to enumerate a database using SQLmap, a tool that uses scripts and dictionary lists to uncover resources that are otherwise not visible to the public and perform SQL injection attacks.
 
-![SQLmap](file:/screenshots/Screenshot04.png)
+![SQLmap](screenshots/Screenshot04.png)
 
 After discovering a useful file, the attacker uses cURL to download it. cURL is a tool that allows the creation of modified http requests from a command line in order to request, delete, or change data on a webserver.
 
-![cURL](file:/screenshots/Screenshot05.png)
+![cURL](screenshots/Screenshot05.png)
 
 The last tool the attacker uses is Feroxbuster, a directory enumeration tool that scans filesystems in order to index their contents and uncover locations and files.
 
-![Feroxbuster](file:/screenshots/Screenshot06.png)
+![Feroxbuster](screenshots/Screenshot06.png)
 
 After identifying all of these tools within the logs, we have our answers to the first question.
 
@@ -56,7 +56,7 @@ Going back to the section in our logs when we observed the attacker using Hydra 
 
 > /rest/user/login
 
-![/rest/user/login](file:/screenshots/Screenshot07.png)
+![/rest/user/login](screenshots/Screenshot07.png)
 
 ## What endpoint was vulnerable to SQL injection?/What parameter was used for the SQL injection?
 
@@ -66,13 +66,13 @@ Refering to our logs where we saw evidence of the attacker using SQLmap, we can 
 
 > q
 
-![/rest/products/search, q](Screenshot08.png)
+![/rest/products/search, q](screenshots/Screenshot08.png)
 
 ## What endpoint did the attacker try to use to retrieve files? (Include the /)
 
 Toward the end of the "access" file, we can see a succesful GET /ftp request, which gives us our last answer. Remember that the response for a succesful http request is 200 - this will be important later on.
 
-![/ftp](Screenshot09.png)
+![/ftp](screenshots/Screenshot09.png)
 
 # Stolen Data
 
@@ -82,7 +82,7 @@ Following the initial nmap scan, we can see plenty of traffic coming through as 
 
 > product reviews
 
-![Product Reviews](Screenshot10.png)
+![Product Reviews](screenshots/Screenshot10.png)
 
 ## Was their brute-force attack successful? If so, what is the timestamp of the successful login? (Yay/Nay, 11/Apr/2021:09:xx:xx +0000)
 
@@ -90,7 +90,7 @@ Remembering that the response code for a succesful http request is 200, we can g
 
 > Yay, 11/Apr/2021:09:16:31 +0000
 
-![Yay, 11/Apr/2021:09:16:31 +0000](Screenshot11.png)
+![Yay, 11/Apr/2021:09:16:31 +0000](screenshots/Screenshot11.png)
 
 ## What user information was the attacker able to retrieve from the endpoint vulnerable to SQL injection?
 
@@ -98,7 +98,7 @@ Refering to the section of the logs where we uncovered SQL injection attempts, w
 
 > Emails, Passwords
 
-![Emails, Passwords](Screenshot12.png)
+![Emails, Passwords](screenshots/Screenshot12.png)
 
 ## What files did they try to download from the vulnerable endpoint? (endpoint from the previous task, question #5)
 
@@ -106,7 +106,7 @@ There are a couple giveaways for this: at the very end of the "access" file, and
 
 > coupons_2013.md.bak, www-data.bak
 
-![coupons_2013.md.bak, www-data.bak](Screenshot13.png)
+![coupons_2013.md.bak, www-data.bak](screenshots/Screenshot13.png)
 
 ## What service and account name were used to retrieve files from the previous question? (service, username)
 
@@ -114,7 +114,7 @@ Referring once more to the "vsftpd" file, we can see a few unsuccesful attempts 
 
 > ftp, anonymous
 
-![ftp, anonymous](Screenshot14.png)
+![ftp, anonymous](screenshots/Screenshot14.png)
 
 ## What service and username were used to gain shell access to the server? (service, username)
 
@@ -122,5 +122,5 @@ Finally, the logs in our "auth" file help us answer this question. We can see th
 
 > ssh, www-data
 
-![ssh, www-data](Screenshot15.png) 
+![ssh, www-data](screenshots/Screenshot15.png) 
 
